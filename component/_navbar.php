@@ -21,7 +21,7 @@ $row = mysqli_fetch_assoc($query);
                         </div>
                     </div>
                     <div class="col-xl-9 col-lg-9">
-                        <div class="main-menu  d-none d-lg-block">
+                        <div class="main-menu d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
                                     <li><a href="dashboard.php">Home</a></li>
@@ -32,6 +32,10 @@ $row = mysqli_fetch_assoc($query);
                                 
                                     <li><a href="profile.php">profile</a></li>
                                     <li><a href="login.php">logout</a></li>
+                                    <li class="mt-3">
+                                        <span class="mr-2 border-left pl-3 py-2" style="font-size:14px;">Holla, <?= $row['name'] ?></span>
+                                        <img src="assets/img/shop/user_pic.png" width="40">
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

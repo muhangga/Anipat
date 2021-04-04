@@ -8,7 +8,7 @@ $data_barang = queryAll("SELECT * FROM barang ORDER BY name_product ASC");
 
 <div class="border-bottom"></div>
 
-<div class="container mt-4">
+<div class="container mt-5">
     <h2>Master Data</h3>
 </div>
 

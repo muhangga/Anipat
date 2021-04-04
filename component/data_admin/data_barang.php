@@ -29,13 +29,13 @@
                         <?php if($row['images'] != null) : ?>
                             <?= $row['images']?>
                         <?php else : ?>
-                                Tidak ada gambar
+                            <img src="assets/img/shop/pet_food1.jpg" width="100">
                         <?php endif; ?>
                     </td>
                     <td class="text-capitalize"><?= $row['category']?></td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></a>    
-                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>    
+                        <a href="proses_data_shop.php?edit=<?= $row['id_barang'] ?>" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-pencil-square-o"></i></a>    
+                        <a href="dashboard.php?delete=<?= $row['id_barang'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data?');" title="Hapus"><i class="fa fa-trash"></i></a>    
                     </td>
                 </tr>
                 <?php endforeach; ?>

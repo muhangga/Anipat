@@ -197,7 +197,7 @@ endif;
             if(mysqli_num_rows($cat) > 0) :
                 foreach($cat as $item_cat) : ?>
 
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 col-6 mb-4">
                     <div class="single_service">
                             <div class="service_thumb d-flex align-items-center justify-content-center">
                                 <div class="service_icon">
@@ -229,7 +229,7 @@ endif;
                         </div>
 
                     <?php if($user['role'] == "member") : ?>
-                        <a href="#" class="btn btn-primary text-capitalize d-block mt-3">Buy Now</a>
+                        <a href="proses_data_shop.php?order&id_barang=<?= $item_cat['id_barang'] ?>" class="btn btn-primary text-capitalize d-block mt-3">Buy Now</a>
                     <?php endif; ?>
 
                     <?php if($user['role'] == "admin") : ?>

@@ -5,7 +5,9 @@ include('component/_navbar.php');
 error_reporting(0);
 
 $barang = $_GET['edit'];
+$id_user = $_SESSION['id_user'];
 $row = queryOne("SELECT * FROM barang WHERE id_barang='$barang'");
+$buy_item = queryAll("SELECT * FROM barang INNER JOIN user ON barang.id_user = user.id_user WHERE id_user='$id_user' ORDER BY buy_at DESC");
 
 if (isset($_POST["add"])) {
 
@@ -59,9 +61,40 @@ if (isset($_POST['update'])) {
             document.location.href = 'dashboard.php';
         </script>";
     }
+}
+
+if (isset($_POST["order"])) {
+
+    $id_barang = $_GET['id_barang'];
+    $order1 = $_POST["order1"];
+    $order2 = $_POST["order2"];
+    $order3 = $_POST["order3"];
+    $buy_at = date("Y-m-d H:i:s");
+    $status = "pending";
+    
+    $insert_data = push("INSERT INTO order VALUES ('', '$id_user', '$order1', '$order2', '$order3', '$buy_at', '$status')");
+
+    var_dump($_POST['order']);
+    if ($insert_data > 0) {
+        echo "
+			<script>
+				alert('Checkout Berhasil!');
+				document.location.href = 'dashboard.php';
+			</script>";
+        var_dump($create_data);
+    } else {
+        echo "
+        <script>
+            alert('Checkout gagal!');
+            document.location.href = 'dashboard.php';
+        </script>";
+        var_dump($create_data);
     }
+} 
 
 ?>
+
+ <!-- TODO :: TAMBAH DATA -->
 
 <?php if(isset($_GET['tambah'])) : ?>
 
@@ -141,6 +174,8 @@ if (isset($_POST['update'])) {
 
 <?php endif; ?>
 
+ <!-- TODO :: EDTT DATA -->
+
 <?php if(isset($_GET['edit'])) : ?>
 
 <div class="border-bottom"></div>
@@ -218,6 +253,92 @@ if (isset($_POST['update'])) {
 </div>
 
 <?php endif; ?>
+
+
+<!--  TODO :: BUY  -->
+
+<?php if(isset($_GET['order'])) : ?>
+
+<div class="border-bottom"></div>
+<div class="bradcam_area breadcam_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcam_text text-center">
+                    <h3>Buy Item</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: -100px;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card mb-5">
+                <div class="card-body">
+
+                   <form action="" method="POST" enctype="multipart/form-data">
+
+                    <div class="row">
+
+                        <?php 
+                        $query = mysqli_query($conn, "SELECT * FROM barang"); ?>
+                        
+                        <input type="hidden" value="<?= $id_user ?>">
+
+                            <div class="col-12 mt-3">
+                                <label for="order1">Name Product</label>
+                                <div class="form-group">
+                                    <select name="order1" id="order1" class="form-control" required>
+                                        <option value="0" selected>-</option>
+
+                                        <!-- <?php foreach($query as $rows) : ?>
+                                            <option value="<?= $rows['id_barang'] ?>"><?= $rows['name_product'] ?></option>
+                                        <?php endforeach ?> -->
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <label for="order2">Name Product</label>
+                                <div class="form-group">
+                                    <select name="order2" id="order2" class="form-control" required>
+                                        <option value="0" selected>-</option>
+
+                                        <?php foreach($query as $rows) : ?>
+                                            <option value="<?= $rows['id_barang'] ?>"><?= $rows['name_product'] ?></option>
+                                        <?php endforeach ?>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <label for="order3">Name Product</label>
+                                <div class="form-group">
+                                    <select name="order3" id="order3" class="form-control" required>
+                                        <option value="0" selected>-</option>
+
+                                        <?php foreach($query as $rows) : ?>
+                                            <option value="<?= $rows['id_barang'] ?>"><?= $rows['name_product'] ?></option>
+                                        <?php endforeach ?>
+                                        
+                                    </select>
+                                </div>
+                            <button type="submit" class="button button-contactForm boxed-btn text-capitalize px-5 py-2 mt-4" name="order">Order</button>
+                            <a href="dashboard.php" class="button button-contactForm box-btn text-capitalize ml-3 px-4 py-2">Cancel</a>
+                        </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
 
 <script src="assets/ckeditor/ckeditor.js"></script>
 <script>
