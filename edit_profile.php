@@ -28,6 +28,25 @@ if (isset($_POST['update'])) {
     }
 }
 
+if (isset($_GET['delete'])) {
+    $deleted = push("DELETE FROM user WHERE id_user='$id_user'");
+
+    if($deleted > 0) {
+        echo "
+			<script>
+				alert('Data berhasil di hapus');
+				document.location.href = 'master_data.php';
+			</script>";
+    }
+    else { 
+        echo "
+			<script>
+				alert('Data gagal di hapus');
+				document.location.href = 'master_data.php';
+			</script>";
+    }
+}
+
 ?>
 
 <div class="border-bottom"></div>

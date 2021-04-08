@@ -23,16 +23,16 @@ if (isset($_POST["add"])) {
 
     if ($create_data > 0) {
         echo "
-			<script>
-				alert('Data berhasil di tambahkan');
-				document.location.href = 'dashboard.php';
-			</script>";
+            <script>
+                alert('Data berhasil di tambahkan');
+                document.location.href = 'dashboard.php';
+            </script>";
     } else {
         echo "
-        <script>
-            alert('Data gagal di tambahkan');
-            document.location.href = 'dashboard.php';
-        </script>";
+            <script>
+                alert('Data gagal di tambahkan');
+                document.location.href = 'dashboard.php';
+            </script>";
     }
 } 
 
@@ -56,16 +56,16 @@ if (isset($_POST['update'])) {
             </script>";
     } else {
         echo "
-        <script>
-            alert('Data gagal di Update');
-            document.location.href = 'dashboard.php';
-        </script>";
+            <script>
+                alert('Data gagal di Update');
+                document.location.href = 'dashboard.php';
+            </script>";
     }
 }
 
 if (isset($_POST["order"])) {
 
-    $id_barang = $_GET['id_barang'];
+    $id_user = $_POST["id_user"];
     $order1 = $_POST["order1"];
     $order2 = $_POST["order2"];
     $order3 = $_POST["order3"];
@@ -74,21 +74,18 @@ if (isset($_POST["order"])) {
     
     $insert_data = push("INSERT INTO order VALUES ('', '$id_user', '$order1', '$order2', '$order3', '$buy_at', '$status')");
 
-    var_dump($_POST['order']);
     if ($insert_data > 0) {
         echo "
 			<script>
 				alert('Checkout Berhasil!');
 				document.location.href = 'dashboard.php';
 			</script>";
-        var_dump($create_data);
     } else {
         echo "
-        <script>
-            alert('Checkout gagal!');
-            document.location.href = 'dashboard.php';
-        </script>";
-        var_dump($create_data);
+            <script>
+                alert('Checkout gagal!');
+                document.location.href = 'dashboard.php';
+            </script>";
     }
 } 
 
@@ -278,24 +275,24 @@ if (isset($_POST["order"])) {
             <div class="card mb-5">
                 <div class="card-body">
 
-                   <form action="" method="POST" enctype="multipart/form-data">
+                   <form action="" method="POST">
 
                     <div class="row">
 
                         <?php 
                         $query = mysqli_query($conn, "SELECT * FROM barang"); ?>
                         
-                        <input type="hidden" value="<?= $id_user ?>">
-
+                        <input type="hidden" name="id_user" value="<?= $id_user; ?>">
+                        
                             <div class="col-12 mt-3">
                                 <label for="order1">Name Product</label>
                                 <div class="form-group">
                                     <select name="order1" id="order1" class="form-control" required>
                                         <option value="0" selected>-</option>
 
-                                        <!-- <?php foreach($query as $rows) : ?>
-                                            <option value="<?= $rows['id_barang'] ?>"><?= $rows['name_product'] ?></option>
-                                        <?php endforeach ?> -->
+                                        <?php foreach($query as $rows) : ?>
+                                            <option value="<?= $rows['name_product'] ?>"><?= $rows['name_product'] ?></option>
+                                        <?php endforeach ?> 
                                         
                                     </select>
                                 </div>
@@ -308,7 +305,7 @@ if (isset($_POST["order"])) {
                                         <option value="0" selected>-</option>
 
                                         <?php foreach($query as $rows) : ?>
-                                            <option value="<?= $rows['id_barang'] ?>"><?= $rows['name_product'] ?></option>
+                                            <option value="<?= $rows['name_product'] ?>"><?= $rows['name_product'] ?></option>
                                         <?php endforeach ?>
                                         
                                     </select>
@@ -322,7 +319,7 @@ if (isset($_POST["order"])) {
                                         <option value="0" selected>-</option>
 
                                         <?php foreach($query as $rows) : ?>
-                                            <option value="<?= $rows['id_barang'] ?>"><?= $rows['name_product'] ?></option>
+                                            <option value="<?= $rows['name_product'] ?>"><?= $rows['name_product'] ?></option>
                                         <?php endforeach ?>
                                         
                                     </select>

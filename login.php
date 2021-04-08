@@ -24,9 +24,9 @@ if(isset($_POST['login'])) {
                     </script>";
             } else {
                 echo"
- 					<script>
- 						document.location.href = 'dashboard.php';
- 					</script>";
+                <script>
+                    document.location.href = 'dashboard.php';
+                </script>";
             }
         }
         else {

@@ -10,16 +10,16 @@ $conn = mysqli_connect("localhost", "root", "", "petshop");
  }
 
 function push($query) {
-    global $conn;
-    $result = mysqli_query($conn, $query);
-    $affected = mysqli_affected_rows($conn);
+    global $conn; // ngakses variabel $conn
+    $result = mysqli_query($conn, $query); // mengquery ke database
+    $affected = mysqli_affected_rows($conn); // mereturn nilai -1 dan 1
     return $affected;
 }
 
 function queryOne($query) {
     global $conn;
     $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($result); // mengkonversi ke array assosiative
     return $row;
 }
 

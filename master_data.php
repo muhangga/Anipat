@@ -3,12 +3,30 @@ include("component/header.php");
 include("component/_navbar.php");
 
 $data_barang = queryAll("SELECT * FROM barang ORDER BY name_product ASC");
-
+$data_member = queryAll("SELECT * FROM user WHERE role = 'member'");
+$data_admin = queryAll("SELECT * FROM user WHERE role = 'admin'");
 ?>
 
 <div class="border-bottom"></div>
 
-<div class="container mt-5">
+<div class="container mt-4">
+    <div class="row">
+        <div class="col p-0">
+            <nav>
+                <ol class="breadcrumb bg-transparent">
+                    <li class="breadcrumb-item ">
+                        <a href="dashboard.php" class="text-dark">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Master Data
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-2">
     <h2>Master Data</h3>
 </div>
 
@@ -21,20 +39,21 @@ $data_barang = queryAll("SELECT * FROM barang ORDER BY name_product ASC");
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                Profile
+                Data Member
             </a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-                Contact
+                Data Admin
             </a>
         </li>
         </ul>
         <div class="tab-content" id="myTabContent">
 
         <?php include("component/data_admin/data_barang.php") ?>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...a</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        <?php include("component/data_admin/data_user.php") ?>
+        <?php include("component/data_admin/data_admin.php") ?>
+        
     </div>
 </div>
 
