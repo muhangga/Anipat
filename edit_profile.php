@@ -10,8 +10,14 @@ if (isset($_POST['update'])) {
     $name = htmlspecialchars($_POST["name"]);
     $email = htmlspecialchars($_POST["email"]);
     $no_telp = htmlspecialchars($_POST["no_telp"]);
+    $avatar = $_POST["old_avatar"];
+    $file = $_FILES["new_avatar"];
 
-    $update_data = push("UPDATE user SET name='$name', email='$email', no_telp='$no_telp' WHERE id_user='$id_user'");
+    if ($file["name"] != null) {
+        $avatar = upload($file, $avatar);
+    }
+
+    $update_data = push("UPDATE user SET name='$name', email='$email', no_telp='$no_telp', avatar='$avatar' WHERE id_user='$id_user'");
 
     if ($update_data > 0) {
         echo "
@@ -58,11 +64,19 @@ if (isset($_GET['delete'])) {
             <div class="card mb-5">
                 <div class="card-body">
                    <div class="profile text-center">
+                   
+                   <?php if($row['avatar'] != null) : ?>
+                        <img src="assets/avatar/<?= $row['avatar'] ?>" width="120" height="120" class="rounded-circle mb-5" style="margin-top: -80px;">
+                    <?php else : ?>
                         <img src="assets/img/shop/user_pic.png" width="120" class="rounded-circle mb-5" style="margin-top: -80px;">
+                    <?php endif ?>
                    </div>
 
-                   <form action="" method="POST">
+                   <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
+
+                    <input value="<?= $row["avatar"]; ?>" type="hidden" name="old_avatar">
+
                         <div class="col-12">
                             <label for="username">Username</label>
                             <div class="form-group">
@@ -92,7 +106,7 @@ if (isset($_GET['delete'])) {
                                 <label for="photo">Photo</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile"
-                                        name="images">
+                                        name="new_avatar">
                                     <label class="custom-file-label" for="customFile">Choose Image</label>
                                 </div>
                         </div>

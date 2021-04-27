@@ -79,7 +79,13 @@ endif;
                     <div class="single_service">
                             <div class="service_thumb d-flex align-items-center justify-content-center">
                                 <div class="service_icon">
-                                    <img src="assets/img/shop/pet_food1.jpg" style="width: 200px; background-size: cover; object-fit: cover;">
+
+                                <?php if($item_food['images'] != null) : ?>
+                                    <img src="assets/avatar/<?= $item_food['images'] ?>" width="120" height="200" style="background-size: cover; object-fit: cover;">
+                                <?php else : ?>
+                                    <img src="assets/img/shop/pet_food1.jpg" width="120" height="200" style="background-size: cover; object-fit: cover;">
+                                <?php endif ?>
+
                                 </div>
                             </div>
                             <div class="service_content text-center">
@@ -140,7 +146,13 @@ endif;
                     <div class="single_service">
                             <div class="service_thumb d-flex align-items-center justify-content-center">
                                 <div class="service_icon">
-                                    <img src="assets/img/shop/pet_food1.jpg" style="width: 200px; background-size: cover; object-fit: cover;">
+                                    
+                                <?php if($item_dog['images'] != null) : ?>
+                                    <img src="assets/avatar/<?= $item_dog['images'] ?>" width="120" height="200" style="background-size: cover; object-fit: cover;">
+                                <?php else : ?>
+                                    <img src="assets/img/shop/pet_food1.jpg" width="120" height="200" style="background-size: cover; object-fit: cover;">
+                                <?php endif ?>
+
                                 </div>
                             </div>
                             <div class="service_content text-center">
@@ -201,7 +213,13 @@ endif;
                     <div class="single_service">
                             <div class="service_thumb d-flex align-items-center justify-content-center">
                                 <div class="service_icon">
-                                    <img src="assets/img/shop/pet_food1.jpg" style="width: 200px; background-size: cover; object-fit: cover;">
+                                    
+                                <?php if($item_cat['images'] != null) : ?>
+                                    <img src="assets/avatar/<?= $item_cat['images'] ?>" width="20" height="200" style="background-size: cover; object-fit: cover;">
+                                <?php else : ?>
+                                    <img src="assets/img/shop/pet_food1.jpg" width="120" height="200" style="background-size: cover; object-fit: cover;">
+                                <?php endif ?>
+
                                 </div>
                             </div>
                             <div class="service_content text-center">

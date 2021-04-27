@@ -25,11 +25,12 @@
                     <td><?= $row['email']?></td>
                     <td><?= $row['no_telp']?></td>
                     <td>
-                        <?php if($row['photo'] != null) : ?>
-                            <?= $row['photo']?>
-                        <?php else : ?>
-                            <img src="assets/img/shop/user_pic.png" width="100">
-                        <?php endif; ?>
+                        <?php if ($row['avatar'] != null) : ?>
+                            <img src="assets/avatar/<?= $row['avatar'] ?>" width="50">
+                            <?php else : ?>
+                                <img src="assets/img/shop/user_pic.png"  width="50">
+                            <?php endif ?>
+                        </div>
                     </td>
                   
                     <td>

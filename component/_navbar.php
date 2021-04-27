@@ -2,6 +2,11 @@
 include("config/koneksi.php");
 session_start();
 
+if (!isset($_SESSION['id_user'])) {
+    header("Location: login.php");
+    exit;
+}
+
 $id_user = $_SESSION['id_user'];
 $query = mysqli_query($conn, "SELECT * FROM user WHERE id_user='$id_user'");
 $row = mysqli_fetch_assoc($query);
@@ -31,10 +36,17 @@ $row = mysqli_fetch_assoc($query);
                                 <?php endif; ?>
                                 
                                     <li><a href="profile.php">profile</a></li>
-                                    <li><a href="login.php">logout</a></li>
+                                    <li><a href="logout.php">Logout</a></li>
                                     <li class="mt-3">
                                         <span class="mr-2 border-left pl-3 py-2" style="font-size:14px;">Holla, <?= $row['name'] ?></span>
-                                        <img src="assets/img/shop/user_pic.png" width="40">
+                                        
+                                        <?php if($row['avatar'] != null) : ?>
+                                            <img src="assets/avatar/<?= $row['avatar'] ?>" width="40" height="40" class="rounded-circle">
+                                            <?php else : ?>
+                                                <img src="assets/img/shop/user_pic.png"  width="120" class="rounded-circle">
+                                            <?php endif ?>
+                                        </div>
+                                        
                                     </li>
                                 </ul>
                             </nav>

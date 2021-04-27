@@ -16,10 +16,16 @@ if (isset($_POST["add"])) {
     $price = htmlspecialchars($_POST["price"]);
     $stock = htmlspecialchars($_POST["stock"]);
     $category = htmlspecialchars($_POST["category"]);
+    $barang = $_POST["old_barang"];
+    $file = $_FILES["images"];
+
+    if ($file["name"] != null) {
+        $barang = upload($file, $barang);
+    }
 
     $desc = preg_replace('/<p>/', '', $desc);
     
-    $create_data = push("INSERT INTO barang VALUES ('', '$name_product', '$desc', '$price', '$stock', '', '$category')");
+    $create_data = push("INSERT INTO barang VALUES ('', '$name_product', '$desc', '$price', '$stock', '$barang', '$category')");
 
     if ($create_data > 0) {
         echo "
@@ -43,10 +49,16 @@ if (isset($_POST['update'])) {
     $price = htmlspecialchars($_POST["price"]);
     $stock = htmlspecialchars($_POST["stock"]);
     $category = htmlspecialchars($_POST["category"]);
+    $old_barang = $_POST["old_barang"];
+    $file = $_FILES["images"];
+
+    if ($file["name"] != null) {
+        $old_barang = upload($file, $old_barang);
+    }
 
     $desc = preg_replace('/<p>/', '', $desc);
 
-    $update_data = push("UPDATE barang SET name_product='$name_product', description='$desc', price='$price', stock='$stock', category='$category' WHERE id_barang='$barang'");
+    $update_data = push("UPDATE barang SET name_product='$name_product', description='$desc', price='$price', stock='$stock', images='$old_barang', category='$category' WHERE id_barang='$barang'");
 
     if ($update_data > 0) {
         echo "
@@ -116,6 +128,7 @@ if (isset($_POST["order"])) {
 
                    <form action="" method="POST" enctype="multipart/form-data">
 
+                   <input value="<?= $row["images"]; ?>" type="hidden" name="old_barang">
                         <div class="row">
                             <div class="col-12">
                                 <label for="name_product">Name Product</label>
@@ -195,6 +208,8 @@ if (isset($_POST["order"])) {
                 <div class="card-body">
 
                    <form action="" method="POST" enctype="multipart/form-data">
+
+                   <input value="<?= $row["images"]; ?>" type="hidden" name="old_barang">
 
                         <div class="row">
                             <div class="col-12">

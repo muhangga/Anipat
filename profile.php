@@ -27,8 +27,14 @@ $row = queryOne("SELECT * FROM user WHERE id_user='$id_user'");
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4 col-xs-12 col-sm-12 text-center mb-2">
-                            <img src="assets/img/shop/user_pic.png" width="120" class="rounded-circle">
+
+                        <?php if($row['avatar'] != null) : ?>
+                            <img src="assets/avatar/<?= $row['avatar'] ?>" width="120" height="120" class="rounded-circle">
+                            <?php else : ?>
+                                <img src="assets/img/shop/user_pic.png"  width="120" class="rounded-circle">
+                            <?php endif ?>
                         </div>
+
                         <div class="col-lg-8">
                             <table class="mt-3" width="100%">
                                 <tr>
