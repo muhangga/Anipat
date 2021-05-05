@@ -5,7 +5,7 @@ include('component/_navbar.php');
 error_reporting(0);
 
 $barang = $_GET['edit'];
-$id_user = $_SESSION['id_user'];
+$user_id = $_SESSION['id_user'];
 $row = queryOne("SELECT * FROM barang WHERE id_barang='$barang'");
 $buy_item = queryAll("SELECT * FROM barang INNER JOIN user ON barang.id_user = user.id_user WHERE id_user='$id_user' ORDER BY buy_at DESC");
 
@@ -75,22 +75,21 @@ if (isset($_POST['update'])) {
     }
 }
 
-if (isset($_POST["order"])) {
+if (isset($_POST["buy"])) {
 
     $id_user = $_POST["id_user"];
-    $order1 = $_POST["order1"];
-    $order2 = $_POST["order2"];
-    $order3 = $_POST["order3"];
-    $buy_at = date("Y-m-d H:i:s");
+    $order = $_POST["order"];
+    $buy_pcs = $_POST["buy_pcs"];
+    $order_at = date("Y-m-d H:i:s");
     $status = "pending";
     
-    $insert_data = push("INSERT INTO order VALUES ('', '$id_user', '$order1', '$order2', '$order3', '$buy_at', '$status')");
+    $insert_data = push("INSERT INTO `order` (`id_order`, `id_user`, `order`, `buy_pcs`, `order_at`, `status`) VALUES (NULL, '$id_user', '$order', '$buy_pcs', '$order_at' ,'$status');");
 
     if ($insert_data > 0) {
         echo "
 			<script>
 				alert('Checkout Berhasil!');
-				document.location.href = 'dashboard.php';
+				document.location.href = 'order.php';
 			</script>";
     } else {
         echo "
@@ -292,17 +291,17 @@ if (isset($_POST["order"])) {
 
                    <form action="" method="POST">
 
+                   <input type="hidden" name="id_user" id="id_user" value="<?= $user_id ?>">
+
                     <div class="row">
 
                         <?php 
                         $query = mysqli_query($conn, "SELECT * FROM barang"); ?>
                         
-                        <input type="hidden" name="id_user" value="<?= $id_user; ?>">
-                        
                             <div class="col-12 mt-3">
-                                <label for="order1">Name Product</label>
+                                <label for="order">Name Product</label>
                                 <div class="form-group">
-                                    <select name="order1" id="order1" class="form-control" required>
+                                    <select name="order" id="order" class="form-control">
                                         <option value="0" selected>-</option>
 
                                         <?php foreach($query as $rows) : ?>
@@ -314,34 +313,14 @@ if (isset($_POST["order"])) {
                             </div>
 
                             <div class="col-12 mt-3">
-                                <label for="order2">Name Product</label>
+                                <label for="buy_pcs">Pcs</label>
                                 <div class="form-group">
-                                    <select name="order2" id="order2" class="form-control" required>
-                                        <option value="0" selected>-</option>
-
-                                        <?php foreach($query as $rows) : ?>
-                                            <option value="<?= $rows['name_product'] ?>"><?= $rows['name_product'] ?></option>
-                                        <?php endforeach ?>
-                                        
-                                    </select>
+                                    <input type="number" name="buy_pcs" id="buy_pcs" class="form-control" required>
                                 </div>
                             </div>
-
-                            <div class="col-12 mt-3">
-                                <label for="order3">Name Product</label>
-                                <div class="form-group">
-                                    <select name="order3" id="order3" class="form-control" required>
-                                        <option value="0" selected>-</option>
-
-                                        <?php foreach($query as $rows) : ?>
-                                            <option value="<?= $rows['name_product'] ?>"><?= $rows['name_product'] ?></option>
-                                        <?php endforeach ?>
-                                        
-                                    </select>
-                                </div>
-                            <button type="submit" class="button button-contactForm boxed-btn text-capitalize px-5 py-2 mt-4" name="order">Order</button>
-                            <a href="dashboard.php" class="button button-contactForm box-btn text-capitalize ml-3 px-4 py-2">Cancel</a>
-                        </div>
+                         </div>
+                        <button type="submit" class="button button-contactForm boxed-btn text-capitalize px-5 py-2 mt-4" name="buy">Order</button>
+                        <a href="dashboard.php" class="button button-contactForm box-btn text-capitalize ml-3 px-4 py-2">Cancel</a>
                    </form>
                 </div>
             </div>
@@ -350,7 +329,6 @@ if (isset($_POST["order"])) {
 </div>
 
 <?php endif; ?>
-
 
 <script src="assets/ckeditor/ckeditor.js"></script>
 <script>

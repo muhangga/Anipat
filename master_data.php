@@ -5,6 +5,49 @@ include("component/_navbar.php");
 $data_barang = queryAll("SELECT * FROM barang ORDER BY name_product ASC");
 $data_member = queryAll("SELECT * FROM user WHERE role = 'member'");
 $data_admin = queryAll("SELECT * FROM user WHERE role = 'admin'");
+$data_order = mysqli_query($conn, "SELECT * FROM `order` INNER JOIN `user` WHERE `order`.`id_user` = `user`.`id_user` ORDER BY order_at DESC ");
+
+if (isset($_GET['confirm'])) {
+    
+    $id_order = $_GET['id_order'];
+    $status = "confirm";
+
+    $update_data = push("UPDATE `order` SET `status`='$status' WHERE `id_order`='$id_order'");
+
+    if ($update_data > 0) {
+        echo "
+            <script>
+                alert('Data berhasil di Update');
+                document.location.href = 'dashboard.php';
+            </script>";
+    } else {
+        echo "
+            <script>
+                alert('Data gagal di Update');
+                document.location.href = 'dashboard.php';
+            </script>";
+    }
+}
+
+if (isset($_GET['delete'])) {
+    $id_order = $_GET['id_order'];
+    $deleted = push("DELETE FROM `order` WHERE `id_order`='$id_order'");
+
+    if($deleted > 0) {
+        echo "
+			<script>
+				alert('Data berhasil di hapus');
+				document.location.href = 'master_data.php';
+			</script>";
+    }
+    else { 
+        echo "
+			<script>
+				alert('Data gagal di hapus');
+				document.location.href = 'master_data.php';
+			</script>";
+    }
+}
 ?>
 
 <div class="border-bottom"></div>
@@ -38,6 +81,11 @@ $data_admin = queryAll("SELECT * FROM user WHERE role = 'admin'");
             </a>
         </li>
         <li class="nav-item" role="presentation">
+            <a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false">
+                Data Order
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
                 Data Member
             </a>
@@ -51,6 +99,7 @@ $data_admin = queryAll("SELECT * FROM user WHERE role = 'admin'");
         <div class="tab-content" id="myTabContent">
 
         <?php include("component/data_admin/data_barang.php") ?>
+        <?php include("component/data_admin/data_order.php") ?>
         <?php include("component/data_admin/data_user.php") ?>
         <?php include("component/data_admin/data_admin.php") ?>
         

@@ -54,42 +54,41 @@ if (isset($_POST["register"])) {
                 <form action="" method="POST">
                     <div class="row">
                         <div class="col-12">
-                        <label for="username" class="mt-3 text-dark">Username</label>
-                            <div class="form-group">
-                                <input class="form-control py-2" name="username" id="username" type="text" placeholder="Username" required>
+                            <label for="username" class="mt-3 text-dark">Username</label>
+                                <div class="form-group">
+                                    <input class="form-control py-2" name="username" id="username" type="text" placeholder="Username" required>
+                                </div>
                             </div>
-                        </div>
                         <div class="col-12">
-                        <label for="name" class="text-dark">Name</label>
-                            <div class="form-group">
-                                <input class="form-control py-2" name="name" id="name" type="text" placeholder="Enter Your Name" required>
+                            <label for="name" class="text-dark">Full Name</label>
+                                <div class="form-group">
+                                    <input class="form-control py-2" name="name" id="name" type="text" placeholder="Enter Your Name" required>
+                                </div>
                             </div>
-                        </div>
                         <div class="col-12">
-                        <label for="email" class="text-dark">Email Address</label>
-                            <div class="form-group">
-                                <input class="form-control py-2" name="email" id="email" type="text" placeholder="Email" required>
+                            <label for="email" class="text-dark">Email Address</label>
+                                <div class="form-group">
+                                    <input class="form-control py-2" name="email" id="email" type="text" placeholder="Email" required>
+                                </div>
                             </div>
-                        </div>
                         <div class="col-12">
-                        <label for="no_telp" class="text-dark">Phone Number</label>
-                            <div class="form-group">
-                                <input class="form-control py-2" name="no_telp" id="no_telp" type="number" placeholder="Phone Number" required>
+                            <label for="no_telp" class="text-dark">Phone Number</label>
+                                <div class="form-group">
+                                    <input class="form-control py-2" name="no_telp" id="no_telp" type="number" placeholder="Phone Number" required>
+                                </div>
                             </div>
-                        </div>
                         <div class="col-12">
-                        <label for="password" class="text-dark">Password</label>
-                            <div class="form-group">
-                                <input class="form-control py-2" name="password" id="password" type="password" placeholder="Password" required>
+                            <label for="password" class="text-dark">Password</label>
+                                <div class="form-group">
+                                    <input class="form-control py-2" name="password" id="password" type="password" placeholder="Password" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <a href="login.php" class="float-right text-secondary mb-3">Already have a account? Login now!</a>
                     <div class="form-group mt-3">
                         <button type="submit" class="button button-contactForm boxed-btn" name="register">Register</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

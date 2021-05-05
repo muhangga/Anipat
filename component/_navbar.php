@@ -31,6 +31,10 @@ $row = mysqli_fetch_assoc($query);
                                 <ul id="navigation">
                                     <li><a href="dashboard.php">Home</a></li>
 
+                                <?php if($row['role'] == "member") : ?>
+                                    <li><a href="order.php">Order</a></li>
+                                <?php endif; ?>
+
                                 <?php if($row['role'] == "admin") : ?>
                                     <li><a href="master_data.php">Master Data</a></li>
                                 <?php endif; ?>
@@ -43,7 +47,7 @@ $row = mysqli_fetch_assoc($query);
                                         <?php if($row['avatar'] != null) : ?>
                                             <img src="assets/avatar/<?= $row['avatar'] ?>" width="40" height="40" class="rounded-circle">
                                             <?php else : ?>
-                                                <img src="assets/img/shop/user_pic.png"  width="120" class="rounded-circle">
+                                                <img src="assets/img/shop/user_pic.png"  width="40" class="rounded-circle">
                                             <?php endif ?>
                                         </div>
                                         

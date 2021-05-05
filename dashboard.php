@@ -113,7 +113,7 @@ endif;
                         </div>
 
                     <?php if($user['role'] == "member") : ?>
-                        <a href="#" class="btn btn-primary text-capitalize d-block mt-3">Buy Now</a>
+                        <a href="proses_data_shop.php?order" class="btn btn-primary text-capitalize d-block mt-3">Buy Now</a>
                     <?php endif; ?>
 
                     <?php if($user['role'] == "admin") : ?>
@@ -180,7 +180,7 @@ endif;
                         </div>
 
                     <?php if($user['role'] == "member") : ?>
-                        <a href="#" class="btn btn-primary text-capitalize d-block mt-3">Buy Now</a>
+                        <a href="proses_data_shop.php?order" class="btn btn-primary text-capitalize d-block mt-3">Buy Now</a>
                     <?php endif; ?>
 
                     <?php if($user['role'] == "admin") : ?>

@@ -70,20 +70,21 @@ if(isset($_POST['login'])) {
                                 <input class="form-control py-2" name="password" id="password" type="password" placeholder="Password" required>
                             </div>
                         </div>
+                        
                         <div class="col-3">
                             <div class="form-group mt-3">
                                 <button type="submit" class="button button-contactForm boxed-btn" name="login">Login</button>
                                 <!-- <a href="dashboard.php" class="button button-contactForm boxed-btn">Login</a> -->
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="form-group mt-3 ml-5">
-                                <a href="register.php" class="button button-contactForm box-btn">Register</a>
+                        
+                        <div class="col-9">
+                            <div class="form-group mt-3">
+                            <a href="register.php" class="float-right text-secondary mb-3">Not have account? Register now!</a>
                             </div>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
